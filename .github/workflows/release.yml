@@ -32,6 +32,7 @@ jobs:
           path: test-results/
   package:
     needs: verify
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:

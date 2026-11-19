@@ -5,6 +5,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { closeTestApp } from './desktop-test-utils.mjs';
 const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vibe-mcp-desktop-'));
 const profile = path.join(root, 'profile'),
   home = path.join(root, 'agents');
@@ -28,7 +29,7 @@ async function launch() {
       VIBE_DEV_URL: '',
       VIBE_PROFILE_DIR: profile,
       VIBE_AGENT_TEST_HOME: home,
-      VIBE_HIDE_TEST_WINDOW: '1',
+      VIBE_HIDE_TEST_WINDOW: process.env.CI ? '0' : '1',
     },
   });
 }
@@ -40,6 +41,8 @@ function text(result) {
 try {
   app = await launch();
   const page = await app.firstWindow();
+  page.setDefaultTimeout(15_000);
+  console.log('MCP check: studio started with an isolated profile.');
   page.on('pageerror', (e) => errors.push(e.message));
   await expect(page.getByRole('heading', { name: /Your workspace|Çalışma alanın/ })).toBeVisible();
   await page.getByLabel(/Interface language|Arayüz dili/).selectOption('en');
@@ -77,6 +80,7 @@ try {
   expect(cursorConfig.mcpServers.other.command).toBe('keep-this-server');
   expect(cursorConfig.examplePreference).toBe(true);
   const connection = JSON.parse(await fs.readFile(path.join(profile, 'mcp-connection.json'), 'utf8'));
+  console.log('MCP check: local server and backed-up client configurations are ready.');
   client = new Client({ name: 'desktop-regression', version: '1.0.0' });
   await client.connect(
     new StreamableHTTPClientTransport(new URL(connection.url), {
@@ -145,6 +149,7 @@ try {
   await client.callTool({ name: 'history_undo', arguments: {} });
   await client.callTool({ name: 'history_redo', arguments: {} });
   await client.callTool({ name: 'project_save', arguments: { projectId } });
+  console.log('MCP check: edits, history and all exports completed without animation frames.');
   await page.evaluate(() => {
     window.requestAnimationFrame = window.vibeTestAnimationFrame;
     delete window.vibeTestAnimationFrame;
@@ -166,6 +171,7 @@ try {
     ),
   ).toBe(true);
   await stdio.close();
+  console.log('MCP check: generated stdio configuration connected successfully.');
   stdio = null;
   await client.close();
   client = null;
@@ -179,7 +185,7 @@ try {
   await enabled.click();
   await expect(enabled).toBeChecked();
   await expect(page.getByText('Running locally', { exact: true })).toBeVisible();
-  await app.close();
+  await closeTestApp(app);
   app = null;
   app = await launch();
   const reopened = await app.firstWindow();
@@ -193,6 +199,9 @@ try {
 } finally {
   if (stdio) await stdio.close();
   if (client) await client.close();
-  if (app) await app.close();
+  if (app)
+    await closeTestApp(app).catch((error) => {
+      console.error(error.message);
+    });
   await fs.rm(root, { recursive: true, force: true });
 }

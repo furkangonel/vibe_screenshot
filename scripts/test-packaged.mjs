@@ -15,7 +15,7 @@ for (const script of ['scripts/desktop-smoke.mjs', 'scripts/mcp-smoke.mjs']) {
   const result = spawnSync(
     platform === 'linux' ? 'xvfb-run' : process.execPath,
     platform === 'linux' ? ['-a', process.execPath, script] : [script],
-    { stdio: 'inherit', env: { ...process.env, VIBE_PACKAGED_EXECUTABLE: executable } },
+    { stdio: 'inherit', timeout: 180_000, env: { ...process.env, VIBE_PACKAGED_EXECUTABLE: executable } },
   );
   if (result.status !== 0) process.exit(result.status || 1);
 }
