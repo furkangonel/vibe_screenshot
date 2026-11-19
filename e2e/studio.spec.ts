@@ -189,6 +189,7 @@ test('cancels a bulk render cleanly', async ({ page }) => {
     await route.continue();
   });
   await page.goto('/');
+  await openStudio(page);
   await page.getByRole('button', { name: 'Export', exact: true }).click();
   await page.getByRole('button', { name: 'All', exact: true }).first().click();
   await page.getByRole('button', { name: 'Create ZIP', exact: true }).click();
