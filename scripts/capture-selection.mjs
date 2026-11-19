@@ -1,3 +1,4 @@
+import { openStudio } from './desktop-test-utils.mjs';
 import { chromium } from '@playwright/test';
 const browser = await chromium.launch();
 try {
@@ -7,7 +8,7 @@ try {
     deviceScaleFactor: 1,
   });
   await page.goto(process.env.VIBE_PREVIEW_URL ?? 'http://127.0.0.1:5179/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Phone · 6.3″', exact: true }).last().click();
   await page.getByLabel('Selection dimensions').waitFor();
   await page.waitForFunction(() => {

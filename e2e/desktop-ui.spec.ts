@@ -1,7 +1,8 @@
+import { openStudio } from './ui';
 import { expect, test } from '@playwright/test';
 test('returns home from a project and preserves independent sidebar preferences', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   const left = page.getByRole('button', { name: 'Layers', exact: true });
   const right = page.getByRole('button', { name: 'Artboard', exact: true });
   await expect(left).toHaveAttribute('aria-expanded', 'true');
@@ -17,7 +18,7 @@ test('returns home from a project and preserves independent sidebar preferences'
   await page.getByRole('button', { name: 'Projects', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Your workspace' })).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await expect(left).toHaveAttribute('aria-expanded', 'true');
   await expect(right).toHaveAttribute('aria-expanded', 'false');
 });

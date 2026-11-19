@@ -21,6 +21,8 @@ _Buradaki tüm ekranlar, dokümantasyon için hazırlanan kurgusal Daylight uygu
 
 Android dikey boyutları telefon için **1080 × 1920**, 7 inç tablet için **1440 × 2560**, 10 inç tablet için **2160 × 3840**. Yatay karşılıkları da var. Mevcut projelere Çıktı menüsünden yeni Android tuvali eklenebilir. Tüm boyutlar [İngilizce README’de](README.md#screenshot-presets) listelenir. Mağaza kurallarını göndermeden önce kontrol et; Android boyutları çalışma ön ayarlarıdır.
 
+Arayüz dili **Ayarlar → Genel** bölümünden değiştirilir. Tuvaldeki dil seçimi yalnızca görselin önizleme dilini değiştirir.
+
 ## İndir ve kullan
 
 [Releases](https://github.com/furkangonel/vibe_screenshot/releases) sayfasından macOS Apple silicon / Intel için DMG veya ZIP, Windows x64 için EXE, Linux x64 için AppImage indirebilirsin.

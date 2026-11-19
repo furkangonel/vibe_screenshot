@@ -1,9 +1,10 @@
+import { openStudio } from './ui';
 import { expect, test } from '@playwright/test';
 import type Konva from 'konva';
 
 test('keeps selection handles small at 8%, 22% and 50% zoom', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Headline 01', exact: true }).click();
   await expect(page.getByLabel('Selection dimensions')).toBeVisible();
   const zoom = page.locator('.zoom-control input');
@@ -39,7 +40,7 @@ test('resizes with the small handle, updates dimensions live and disables contro
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   const row = page
     .locator('.layer-row')
     .filter({ has: page.getByRole('button', { name: 'Headline 01', exact: true }) })
@@ -79,7 +80,7 @@ test('resizes with the small handle, updates dimensions live and disables contro
 
 test('uses four corner handles for devices and preserves their proportions', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Phone · 6.3″', exact: true }).last().click();
   await expect(page.getByLabel('Selection dimensions')).toBeVisible();
   const result = await page.evaluate(() => {
@@ -100,7 +101,7 @@ test('uses four corner handles for devices and preserves their proportions', asy
 
 test('selects a device directly on the canvas after clearing the selection', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.locator('.canvas-shell canvas').first().waitFor();
   const points = await page.evaluate(() => {
     const runtime = (window as unknown as { Konva: typeof Konva }).Konva;

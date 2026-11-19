@@ -3,7 +3,8 @@
 ## 2026.11.1
 
 - Added an explicit All projects button, native macOS titlebar, application menu navigation, and keyboard shortcuts.
-- Added independent layers/inspector toggles and remembered workspace preferences.
+- Added independent layers/inspector controls at opposite window edges, stable canvas layout when panes close, and remembered workspace preferences.
+- Moved interface language to Settings, grouped project actions beside the title, and placed screenshot ordering below the canvas.
 - Added Settings with precision controls, local MCP status, client configuration previews, and a searchable tool catalog.
 - Added authenticated loopback MCP with 34 tools, one reference resource, and one composition prompt.
 - Added local detection and configuration for Codex, Claude Code, Claude Desktop, Cursor, and VS Code, with backups and preservation of unrelated settings.

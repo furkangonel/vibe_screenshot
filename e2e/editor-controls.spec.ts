@@ -1,3 +1,4 @@
+import { openStudio } from './ui';
 import { test, expect, type Page } from '@playwright/test';
 import type Konva from 'konva';
 
@@ -96,7 +97,7 @@ test('screenshot reordering preserves the exact exported pixels of seam content 
 
 test('groups shared layers and moves screenshots using buttons and a destination', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await expect(page.locator('.layer-page-group')).toHaveCount(6);
   await page.getByRole('button', { name: 'Move screenshot right 1', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Screenshot 2', exact: true })).toHaveAttribute(
@@ -229,7 +230,7 @@ test('shows center guides during dragging and size matching while resizing witho
 
 test('accepts image files dropped on the canvas and directly on a device screen', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.locator('.canvas-shell canvas').first().waitFor();
   const image = await page.evaluate(() => {
     const c = document.createElement('canvas');
@@ -274,7 +275,7 @@ test('accepts image files dropped on the canvas and directly on a device screen'
 
 test('crops the complete device, resets non-destructively, and switches to landscape', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Phone · 6.3″', exact: true }).first().click();
   const width = Number(await page.getByLabel('Width', { exact: true }).inputValue()),
     height = Number(await page.getByLabel('Height', { exact: true }).inputValue());

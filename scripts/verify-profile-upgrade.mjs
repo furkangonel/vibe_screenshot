@@ -1,3 +1,4 @@
+import { openStudio } from './desktop-test-utils.mjs';
 import { _electron as electron, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 const [profile, oldExecutable, newExecutable, reportPath] = process.argv.slice(2);
@@ -38,7 +39,7 @@ async function inspect(executablePath, android) {
       );
     });
     if (android) {
-      await page.getByRole('button', { name: /Studio|Stüdyo/, exact: true }).click();
+      await openStudio(page);
       await expect(page.locator('option[value="new:android-phone-portrait"]')).toHaveCount(1);
       await expect(page.locator('option[value="new:android-tablet-7-portrait"]')).toHaveCount(1);
       await expect(page.locator('option[value="new:android-tablet-10-portrait"]')).toHaveCount(1);

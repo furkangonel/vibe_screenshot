@@ -1,3 +1,4 @@
+import { openStudio, setInterfaceLanguage } from './desktop-test-utils.mjs';
 import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 const browser = await chromium.launch();
@@ -39,10 +40,10 @@ try {
   await page.reload();
   await page.locator('.project-preview img').nth(5).waitFor();
   await page.screenshot({ path: 'docs/workspace.png' });
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.locator('.canvas-shell canvas').first().waitFor();
   await page.screenshot({ path: 'docs/studio.png' });
-  await page.getByLabel('Interface language').selectOption('tr');
+  await setInterfaceLanguage(page, 'tr');
   await page.screenshot({ path: 'docs/studio-tr.png' });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: 'docs/mobile.png' });

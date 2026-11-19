@@ -8,7 +8,7 @@ import {
   ChevronUp,
   Copy,
   Download,
-  FileJson,
+  MoreHorizontal,
   ImagePlus,
   Languages,
   Maximize2,
@@ -116,7 +116,7 @@ function NumericField({
 function App() {
   const workspace = useWorkspace();
   const { project, setProject, undo, redo, status: saveState } = workspace;
-  const { t, language, setLanguage } = useI18n();
+  const { t } = useI18n();
   const [libraryOpen, setLibraryOpen] = useState(true);
   const [preferences, setPreferences] = useState<StudioPreferences>(() => {
     const defaults = {
@@ -133,10 +133,27 @@ function App() {
       return defaults;
     }
   });
-  const leftOpen = preferences.layers,
-    rightOpen = preferences.inspector;
-  const setLeftOpen = (value: boolean) => changePreferences({ layers: value });
-  const setRightOpen = (value: boolean) => changePreferences({ inspector: value });
+  const [compact, setCompact] = useState(window.innerWidth <= 720);
+  const [compactPane, setCompactPane] = useState<'left' | 'right' | null>(null);
+  const leftOpen = compact ? compactPane === 'left' : preferences.layers;
+  const rightOpen = compact ? compactPane === 'right' : preferences.inspector;
+  const setLeftOpen = (value: boolean) =>
+    compact
+      ? setCompactPane((current) => (value ? 'left' : current === 'left' ? null : current))
+      : changePreferences({ layers: value });
+  const setRightOpen = (value: boolean) =>
+    compact
+      ? setCompactPane((current) => (value ? 'right' : current === 'right' ? null : current))
+      : changePreferences({ inspector: value });
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 720px)');
+    const resize = () => {
+      setCompact(query.matches);
+      setCompactPane(null);
+    };
+    query.addEventListener('change', resize);
+    return () => query.removeEventListener('change', resize);
+  }, []);
   const [settingsOpen, setSettingsOpen] = useState(false);
   function changePreferences(patch: Partial<StudioPreferences>) {
     setPreferences((current) => {
@@ -168,6 +185,20 @@ function App() {
     const navigate = (destination: string) => {
       if (destination === 'home') setLibraryOpen(true);
       if (destination === 'settings') setSettingsOpen(true);
+      if (window.innerWidth <= 720 && ['toggle-left', 'toggle-right', 'focus'].includes(destination)) {
+        setCompactPane((current) =>
+          destination === 'focus'
+            ? null
+            : destination === 'toggle-left'
+              ? current === 'left'
+                ? null
+                : 'left'
+              : current === 'right'
+                ? null
+                : 'right',
+        );
+        return;
+      }
       if (destination === 'toggle-left')
         setPreferences((p) => {
           const next = { ...p, layers: !p.layers };
@@ -605,9 +636,24 @@ function App() {
       }}
       label={t('Drop project or images')}
     >
-      <div className="app-shell">
+      <div className={`app-shell ${libraryOpen ? 'is-home' : ''}`}>
         <header className="topbar">
           <div className="brand-block">
+            {!libraryOpen && view === 'editor' && (
+              <button
+                className="icon-button panel-toggle left-toggle"
+                aria-label={t('Layers')}
+                title={t('Layers') + ' · ⌘1'}
+                aria-expanded={leftOpen}
+                onClick={() => {
+                  setLeftOpen(!leftOpen);
+                  if (window.innerWidth <= 720) setRightOpen(false);
+                }}
+              >
+                <PanelLeft size={16} />
+              </button>
+            )}
+
             <button
               className={`brand-mark ${!libraryOpen ? 'back-to-library' : ''}`}
               title={t('All projects') + ' · ⇧⌘H'}
@@ -632,6 +678,7 @@ function App() {
               <div>
                 <input
                   className="project-name"
+                  style={{ width: `${Math.min(24, Math.max(7, project.name.length + 2))}ch` }}
                   value={project.name}
                   maxLength={200}
                   onChange={(event) => updateProject((current) => ({ ...current, name: event.target.value }))}
@@ -651,30 +698,100 @@ function App() {
                 </span>
               </div>
             )}
+            {!libraryOpen && (
+              <div className="project-menu-wrap">
+                <button
+                  className="icon-button project-options"
+                  aria-label={t('Project')}
+                  title={t('Project options')}
+                  onClick={() => setProjectMenuOpen((open) => !open)}
+                >
+                  <MoreHorizontal size={17} />
+                </button>
+                {projectMenuOpen && (
+                  <div className="project-menu">
+                    <button onClick={exportProjectJson}>
+                      <Download size={15} /> {t('Projeyi dışa aktar')}
+                    </button>
+                    <button onClick={() => projectImportRef.current?.click()}>
+                      <Upload size={15} /> {t('Proje içe aktar')}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLibraryOpen(true);
+                        setProjectMenuOpen(false);
+                      }}
+                    >
+                      <FolderOpen size={15} />
+                      {t('Projects')}
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (workspace.persisted || saveState === 'saving') void workspace.flush();
+                        else void workspace.persist(true);
+                        setProjectMenuOpen(false);
+                      }}
+                    >
+                      <Save size={15} />
+                      {t('Save on this device')}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          <nav className="view-tabs" aria-label={t('Görünüm')}>
-            <button
-              className={!libraryOpen && view === 'editor' ? 'active' : ''}
-              onClick={() => {
-                setLibraryOpen(false);
-                setView('editor');
-              }}
-            >
-              <PanelTop size={15} /> {t('Studio')}
-            </button>
-            <button
-              className={!libraryOpen && view === 'localizations' ? 'active' : ''}
-              onClick={() => {
-                setLibraryOpen(false);
-                setView('localizations');
-              }}
-            >
-              <Languages size={15} /> {t('Localizations')}
-            </button>
-          </nav>
+          {!libraryOpen && (
+            <nav className="view-tabs" aria-label={t('Görünüm')}>
+              <button
+                className={!libraryOpen && view === 'editor' ? 'active' : ''}
+                onClick={() => {
+                  setLibraryOpen(false);
+                  setView('editor');
+                }}
+              >
+                <PanelTop size={15} /> {t('Studio')}
+              </button>
+              <button
+                className={!libraryOpen && view === 'localizations' ? 'active' : ''}
+                onClick={() => {
+                  setLibraryOpen(false);
+                  setView('localizations');
+                }}
+              >
+                <Languages size={15} /> {t('Localizations')}
+              </button>
+            </nav>
+          )}
 
           <div className="topbar-actions">
+            {!libraryOpen && (
+              <>
+                {' '}
+                <button
+                  className="icon-button"
+                  aria-label={t('Undo')}
+                  title={t('Undo') + ' · ⌘Z'}
+                  disabled={!workspace.past.length || libraryOpen}
+                  onClick={workspace.undo}
+                >
+                  <Undo2 size={16} />
+                </button>
+                <button
+                  className="icon-button"
+                  aria-label={t('Redo')}
+                  title={t('Redo') + ' · ⇧⌘Z'}
+                  disabled={!workspace.future.length || libraryOpen}
+                  onClick={workspace.redo}
+                >
+                  <Redo2 size={16} />
+                </button>
+                <button className="button primary" onClick={() => setExportOpen(true)}>
+                  <Download size={16} /> {t('Export')}
+                </button>
+              </>
+            )}
+            {!libraryOpen && <span className="toolbar-divider" />}
             <button
               className="icon-button settings-button"
               aria-label={t('Settings')}
@@ -683,70 +800,20 @@ function App() {
             >
               <Settings2 size={17} />
             </button>
-            <select
-              className="interface-language"
-              aria-label={t('Interface language')}
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as 'tr' | 'en')}
-            >
-              <option value="en">EN</option>
-              <option value="tr">TR</option>
-            </select>
-            <button
-              className="icon-button"
-              aria-label={t('Undo')}
-              title={t('Undo') + ' · ⌘Z'}
-              disabled={!workspace.past.length || libraryOpen}
-              onClick={workspace.undo}
-            >
-              <Undo2 size={16} />
-            </button>
-            <button
-              className="icon-button"
-              aria-label={t('Redo')}
-              title={t('Redo') + ' · ⇧⌘Z'}
-              disabled={!workspace.future.length || libraryOpen}
-              onClick={workspace.redo}
-            >
-              <Redo2 size={16} />
-            </button>
-            <div className="project-menu-wrap">
-              <button className="button ghost" onClick={() => setProjectMenuOpen((open) => !open)}>
-                <FileJson size={16} /> {t('Project')} <ChevronDown size={14} />
+            {!libraryOpen && view === 'editor' && (
+              <button
+                className="icon-button panel-toggle right-toggle"
+                aria-label={t('Artboard')}
+                title={t('Artboard') + ' · ⌘2'}
+                aria-expanded={rightOpen}
+                onClick={() => {
+                  setRightOpen(!rightOpen);
+                  if (window.innerWidth <= 720) setLeftOpen(false);
+                }}
+              >
+                <PanelRight size={16} />
               </button>
-              {projectMenuOpen && (
-                <div className="project-menu">
-                  <button onClick={exportProjectJson}>
-                    <Download size={15} /> {t('Projeyi dışa aktar')}
-                  </button>
-                  <button onClick={() => projectImportRef.current?.click()}>
-                    <Upload size={15} /> {t('Proje içe aktar')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setLibraryOpen(true);
-                      setProjectMenuOpen(false);
-                    }}
-                  >
-                    <FolderOpen size={15} />
-                    {t('Projects')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (workspace.persisted || saveState === 'saving') void workspace.flush();
-                      else void workspace.persist(true);
-                      setProjectMenuOpen(false);
-                    }}
-                  >
-                    <Save size={15} />
-                    {t('Save on this device')}
-                  </button>
-                </div>
-              )}
-            </div>
-            <button className="button primary" onClick={() => setExportOpen(true)}>
-              <Download size={16} /> {t('Export')}
-            </button>
+            )}
           </div>
         </header>
 
@@ -764,7 +831,7 @@ function App() {
               <section className="panel-section output-section">
                 <div className="section-heading">
                   <span>{t('Output')}</span>
-                  <span className={`status-dot ${exactSize ? 'good' : 'bad'}`} />
+                  <span title={t(preset.notes)} className={`status-dot ${exactSize ? 'good' : 'bad'}`} />
                 </div>
                 <select
                   aria-label={t('Output')}
@@ -785,7 +852,7 @@ function App() {
                 >
                   {project.documents.map((document) => (
                     <option key={document.id} value={document.id}>
-                      {t(document.name)} · {document.width}×{document.height}
+                      {t(document.name)}
                     </option>
                   ))}
                   <optgroup label={t('Add Google Play canvas')}>
@@ -795,7 +862,7 @@ function App() {
                         !project.documents.some((document) => document.presetId === preset.id),
                     ).map((preset) => (
                       <option key={preset.id} value={`new:${preset.id}`}>
-                        {t(preset.label)} · {preset.width}×{preset.height}
+                        {t(preset.label)}
                       </option>
                     ))}
                   </optgroup>
@@ -810,7 +877,7 @@ function App() {
                       : `${currentDocument.pageCount} ${t('screenshots')}`}
                   </span>
                 </div>
-                <p className="microcopy">{t(preset.notes)}</p>
+
                 {isDuoOutput && (
                   <div className="duo-output-contract">
                     <div>
@@ -940,33 +1007,11 @@ function App() {
 
             <section className="workspace">
               <div className="workspace-toolbar">
-                <button
-                  className="icon-button panel-toggle left-toggle"
-                  aria-label={t('Layers')}
-                  title={t('Layers') + ' · ⌘1'}
-                  aria-expanded={leftOpen}
-                  onClick={() => {
-                    setLeftOpen(!leftOpen);
-                    if (window.innerWidth <= 720) setRightOpen(false);
-                  }}
-                >
-                  <PanelLeft size={16} />
-                </button>
-                <button
-                  className="icon-button panel-toggle right-toggle"
-                  aria-label={t('Artboard')}
-                  title={t('Artboard') + ' · ⌘2'}
-                  aria-expanded={rightOpen}
-                  onClick={() => {
-                    setRightOpen(!rightOpen);
-                    if (window.innerWidth <= 720) setLeftOpen(false);
-                  }}
-                >
-                  <PanelRight size={16} />
-                </button>
                 <div className="locale-picker">
                   <Languages size={15} />
+                  <span className="preview-language-label">{t('Preview language')}</span>
                   <select
+                    aria-label={t('Preview language')}
                     value={locale}
                     onChange={(event) => {
                       setLocale(event.target.value);
@@ -989,7 +1034,27 @@ function App() {
                   {t('Smart guides')}
                 </button>
                 <div className="zoom-control">
-                  <Maximize2 size={14} />
+                  <button
+                    className="fit-canvas plain-icon"
+                    aria-label={t('Fit canvas')}
+                    title={t('Fit canvas')}
+                    onClick={() => {
+                      const shell = window.document.querySelector('.canvas-scroll');
+                      if (shell)
+                        setZoom(
+                          Math.max(
+                            0.08,
+                            Math.min(
+                              0.5,
+                              (shell.clientWidth - 80) / (currentDocument.width * currentDocument.pageCount),
+                              (shell.clientHeight - 112) / currentDocument.height,
+                            ),
+                          ),
+                        );
+                    }}
+                  >
+                    <Maximize2 size={14} />
+                  </button>
                   <input
                     type="range"
                     min="0.08"
@@ -1001,15 +1066,7 @@ function App() {
                   <span>{Math.round(zoom * 100)}%</span>
                 </div>
               </div>
-              <ScreenshotNavigator
-                count={currentDocument.pageCount}
-                active={activePage}
-                onSelect={(page) => {
-                  setActivePage(page);
-                  setSelectedId(null);
-                }}
-                onMove={reorderScreenshot}
-              />
+
               <Suspense fallback={<div className="canvas-loading">{t('Studio hazırlanıyor…')}</div>}>
                 <CanvasEditor
                   project={project}
@@ -1029,6 +1086,15 @@ function App() {
                   }}
                 />
               </Suspense>
+              <ScreenshotNavigator
+                count={currentDocument.pageCount}
+                active={activePage}
+                onSelect={(page) => {
+                  setActivePage(page);
+                  setSelectedId(null);
+                }}
+                onMove={reorderScreenshot}
+              />
             </section>
 
             <aside className="right-panel">
@@ -1061,8 +1127,15 @@ function App() {
         {settingsOpen && (
           <Settings
             onClose={() => setSettingsOpen(false)}
-            preferences={preferences}
-            onPreferences={changePreferences}
+            preferences={{ ...preferences, layers: leftOpen, inspector: rightOpen }}
+            onPreferences={(patch) => {
+              if (patch.layers !== undefined) setLeftOpen(patch.layers);
+              if (patch.inspector !== undefined) setRightOpen(patch.inspector);
+              const rest = { ...patch };
+              delete rest.layers;
+              delete rest.inspector;
+              if (Object.keys(rest).length) changePreferences(rest);
+            }}
           />
         )}
         {(notice || workspace.error) && (

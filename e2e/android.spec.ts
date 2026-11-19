@@ -1,3 +1,4 @@
+import { openStudio, setInterfaceLanguage } from './ui';
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs/promises';
 
@@ -31,7 +32,7 @@ test('existing projects add Android canvases on demand without losing previous w
   await page.getByRole('combobox', { name: 'Finish', exact: true }).selectOption('silver');
   await page.getByRole('button', { name: 'Projects', exact: true }).click();
   await page.getByLabel('Save on this device').click();
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await expect(page.locator('.save-state')).toContainText('Saved on this device');
   await page.getByRole('button', { name: 'Project', exact: true }).click();
   const downloadEvent = page.waitForEvent('download');
@@ -54,8 +55,8 @@ test('existing projects add Android canvases on demand without losing previous w
     orientation: 'landscape',
   });
   await page.reload();
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
-  await output.selectOption({ label: 'Android Tablet 7″ · Portrait · 1440×2560' });
+  await openStudio(page);
+  await output.selectOption({ label: 'Android Tablet 7″ · Portrait' });
   await expect(page.getByRole('spinbutton', { name: /^Screenshot count/ })).toHaveValue('8');
   await expect(output.locator('option[value="new:android-tablet-7-portrait"]')).toHaveCount(0);
 });
@@ -168,11 +169,11 @@ test('all Android finishes decode and preserve exact screen colors in full-resol
 
 test('Google Play page controls remain available in Turkish', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
-  await page.getByLabel('Interface language').selectOption('tr');
+  await openStudio(page);
+  await setInterfaceLanguage(page, 'tr');
   await page
     .getByRole('combobox', { name: 'Çıktı', exact: true })
-    .selectOption({ label: 'Android Telefon · Dikey · 1080×1920' });
+    .selectOption({ label: 'Android Telefon · Dikey' });
   await expect(page.locator('.rule-badge')).toHaveText('Google Play boyutu');
   await expect(page.locator('.inspector input[type="number"]').first()).toHaveAttribute('max', '8');
 });

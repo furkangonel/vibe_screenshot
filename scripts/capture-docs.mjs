@@ -51,6 +51,37 @@ try {
     return runtime?.stages?.[0]?.find('Image').filter((n) => n.image()?.complete).length >= 3;
   });
   await page.screenshot({ path: 'docs/images/studio.png' });
+  if (process.env.VIBE_CAPTURE_PANELS === '1') {
+    for (const [name, left, right] of [
+      ['both', true, true],
+      ['left', true, false],
+      ['none', false, false],
+      ['right', false, true],
+    ]) {
+      for (const [label, wanted] of [
+        ['Layers', left],
+        ['Artboard', right],
+      ]) {
+        const toggle = page.getByRole('button', { name: label, exact: true });
+        if ((await toggle.getAttribute('aria-expanded')) !== String(wanted)) await toggle.click();
+      }
+      await page.screenshot({ path: `docs/images/panels-${name}.png` });
+      console.log(
+        name,
+        JSON.stringify({
+          canvas: await page.locator('.canvas-scroll').boundingBox(),
+          leftControl: await page.getByRole('button', { name: 'Layers', exact: true }).boundingBox(),
+          rightControl: await page.getByRole('button', { name: 'Artboard', exact: true }).boundingBox(),
+        }),
+      );
+    }
+    await page.getByRole('button', { name: 'Layers', exact: true }).click();
+    for (const width of [1024, 720, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.screenshot({ path: `docs/images/window-${width}.png` });
+    }
+    await page.setViewportSize({ width: 1440, height: 960 });
+  }
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   await page.screenshot({ path: 'docs/images/preferences.png' });
   await page.getByRole('button', { name: 'Close', exact: true }).click();

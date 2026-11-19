@@ -1,3 +1,4 @@
+import { openStudio, setInterfaceLanguage } from './ui';
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs/promises';
 import JSZip from 'jszip';
@@ -28,7 +29,7 @@ test('creates isolated projects, remembers only saved ones, and keeps the interf
   await page.getByRole('dialog').getByLabel('Save on this device').uncheck();
   await page.getByRole('button', { name: 'Create project', exact: true }).click();
   await expect(page.locator('.save-state')).toContainText('Session only');
-  await page.getByLabel('Interface language').selectOption('tr');
+  await setInterfaceLanguage(page, 'tr');
   await expect(page.getByRole('button', { name: 'Dışa aktar', exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Çalışma alanın' })).toBeVisible();
@@ -42,7 +43,7 @@ test('creates isolated projects, remembers only saved ones, and keeps the interf
 
 test('exports real opaque PNGs and a locale-specific ZIP', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Export', exact: true }).click();
   const pngEvent = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Current panel', exact: true }).click();
@@ -84,7 +85,7 @@ test('remains usable at a narrow viewport and traps dialog focus', async ({ page
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(page);
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
   await expect(page.locator('.left-panel')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

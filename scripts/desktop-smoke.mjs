@@ -2,7 +2,7 @@ import { _electron as electron, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { closeTestApp } from './desktop-test-utils.mjs';
+import { closeTestApp, openStudio, setInterfaceLanguage } from './desktop-test-utils.mjs';
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), 'vibe-desktop-'));
 const executablePath = process.env.VIBE_PACKAGED_EXECUTABLE;
 async function launch() {
@@ -24,7 +24,7 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await expect(page.getByRole('heading', { name: /Your workspace|Çalışma alanın/ })).toBeVisible();
-  await page.getByLabel(/Interface language|Arayüz dili/).selectOption('en');
+  await setInterfaceLanguage(page, 'en');
   await page.getByRole('button', { name: 'New project', exact: true }).click();
   await page.getByLabel('Name your project').fill('Desktop smoke');
   await page.getByRole('dialog').getByLabel('Project notes').fill('Saved from a sandboxed desktop renderer.');
@@ -134,7 +134,7 @@ try {
   await expect(reopened.locator('.project-card')).toHaveCount(1);
   await expect(reopened.locator('.project-card')).toContainText('Desktop smoke');
   await expect(reopened.locator('.project-card')).toContainText('sandboxed desktop');
-  await reopened.getByRole('button', { name: 'Studio', exact: true }).click();
+  await openStudio(reopened);
   await expect(reopened.locator('.layer-row')).toHaveCount(2);
   await expect(reopened.locator('.layer-name').filter({ hasText: 'Foldable · Tent' })).toHaveCount(1);
   await reopened.getByRole('button', { name: 'Phone · 6.3″', exact: true }).click();

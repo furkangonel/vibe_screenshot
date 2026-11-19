@@ -38,6 +38,8 @@ Creative presets are also included at 3840 × 1646, 3840 × 2560, and 5244 × 29
 Android resolutions are working presets, not mandatory device-specific sizes. Generic device names and internal IDs do not certify real hardware. Check [Apple’s screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/) and [Google Play’s preview asset guidelines](https://support.google.com/googleplay/android-developer/answer/9866151) before submitting.
 </details>
 
+The interface language is changed in **Settings → General**. The canvas language picker changes only the screenshot preview.
+
 ## Download
 
 Get an installer from [Releases](https://github.com/furkangonel/vibe_screenshot/releases):

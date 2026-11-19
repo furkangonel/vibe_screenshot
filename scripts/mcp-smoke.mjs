@@ -5,7 +5,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { closeTestApp } from './desktop-test-utils.mjs';
+import { closeTestApp, setInterfaceLanguage } from './desktop-test-utils.mjs';
 const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vibe-mcp-desktop-'));
 const profile = path.join(root, 'profile'),
   home = path.join(root, 'agents');
@@ -45,7 +45,7 @@ try {
   console.log('MCP check: studio started with an isolated profile.');
   page.on('pageerror', (e) => errors.push(e.message));
   await expect(page.getByRole('heading', { name: /Your workspace|Çalışma alanın/ })).toBeVisible();
-  await page.getByLabel(/Interface language|Arayüz dili/).selectOption('en');
+  await setInterfaceLanguage(page, 'en');
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   await page.getByRole('button', { name: 'Agent connections', exact: true }).click();
   const enabled = page.getByRole('checkbox', { name: 'Enable MCP', exact: true });

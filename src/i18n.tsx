@@ -3,6 +3,9 @@ import { readPreference, writePreference } from './storage';
 export type Language = 'en' | 'tr';
 // The source phrase is a stable key. Both languages are explicit and checked in tests.
 export const messages: Record<string, [string, string]> = {
+  'Project options': ['Project options', 'Proje seçenekleri'],
+  'Preview language': ['Preview language', 'Önizleme dili'],
+  'Fit canvas': ['Fit canvas', 'Tuvali sığdır'],
   'Screenshot studio': ['Screenshot studio', 'Mağaza görsel stüdyosu'],
   Settings: ['Settings', 'Ayarlar'],
   'Settings sections': ['Settings sections', 'Ayar bölümleri'],

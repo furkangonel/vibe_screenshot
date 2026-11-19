@@ -50,7 +50,7 @@
   },
   "documents": [
     {
-      "id": "layout_mwo1atcl_9nfyak",
+      "id": "layout_mwo2xvmu_cg97nr",
       "presetId": "iphone-63-portrait",
       "name": "iPhone 6.3″ · Portrait",
       "width": 1206,
@@ -70,7 +70,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_b7eix5",
+          "id": "text_mwo2xvmu_l02t58",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -94,7 +94,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_an9vi9",
+          "id": "text_mwo2xvmu_bg0eyi",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -118,7 +118,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_adphs0",
+          "id": "device_mwo2xvmu_jmo74e",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 192.60000000000002,
@@ -141,7 +141,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_8hbylu",
+          "id": "text_mwo2xvmu_rywqrp",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -165,7 +165,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_jjgrsx",
+          "id": "text_mwo2xvmu_273at6",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -189,7 +189,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_wmcg0q",
+          "id": "device_mwo2xvmu_p920y9",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 1398.6,
@@ -212,7 +212,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_1c7r86",
+          "id": "text_mwo2xvmu_mzud7d",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -236,7 +236,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_vyc879",
+          "id": "text_mwo2xvmu_x9n266",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -260,7 +260,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_lt4vmr",
+          "id": "device_mwo2xvmu_e6pucw",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 2604.6,
@@ -285,7 +285,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_hk9dfg",
+      "id": "layout_mwo2xvmu_5flfv4",
       "presetId": "iphone-69-portrait",
       "name": "iPhone 6.9″ · Portrait",
       "width": 1320,
@@ -305,7 +305,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_s6ie57",
+          "id": "text_mwo2xvmu_cvcx4h",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -329,7 +329,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_dvurmi",
+          "id": "text_mwo2xvmu_3l8bss",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -353,7 +353,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_m700qt",
+          "id": "device_mwo2xvmu_nle31y",
           "type": "device",
           "name": "Phone · 6.9″",
           "x": 210.2976,
@@ -376,7 +376,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_4mn92k",
+          "id": "text_mwo2xvmu_8u63se",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -400,7 +400,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_n02ipo",
+          "id": "text_mwo2xvmu_7sm8cw",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -424,7 +424,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_x896rt",
+          "id": "device_mwo2xvmu_12oy1p",
           "type": "device",
           "name": "Phone · 6.9″",
           "x": 1530.2975999999999,
@@ -447,7 +447,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_sb1pxa",
+          "id": "text_mwo2xvmu_0le5sn",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -471,7 +471,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_fhkgke",
+          "id": "text_mwo2xvmu_jq9ox8",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -495,7 +495,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_w1ymrj",
+          "id": "device_mwo2xvmu_vo3q1n",
           "type": "device",
           "name": "Phone · 6.9″",
           "x": 2850.2976,
@@ -520,7 +520,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_cswoq5",
+      "id": "layout_mwo2xvmu_cm7ktt",
       "presetId": "ipad-13-portrait",
       "name": "iPad 13″ · Portrait",
       "width": 2064,
@@ -540,7 +540,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_dwnrei",
+          "id": "text_mwo2xvmu_eqvwzj",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -564,7 +564,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_rnd2di",
+          "id": "text_mwo2xvmu_a17gvn",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -588,7 +588,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_1i4o86",
+          "id": "device_mwo2xvmu_8nttjw",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 356.8426666666667,
@@ -611,7 +611,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_5e75wm",
+          "id": "text_mwo2xvmu_zg801w",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -635,7 +635,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_n841f4",
+          "id": "text_mwo2xvmu_0oi05j",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -659,7 +659,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_kla8sb",
+          "id": "device_mwo2xvmu_uej4o5",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 2420.8426666666664,
@@ -682,7 +682,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_6llcz2",
+          "id": "text_mwo2xvmu_147bah",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -706,7 +706,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_il1yvd",
+          "id": "text_mwo2xvmu_8rjf1w",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -730,7 +730,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_z58gf5",
+          "id": "device_mwo2xvmu_kxt4go",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 4484.842666666666,
@@ -755,7 +755,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_vdc5u2",
+      "id": "layout_mwo2xvmu_dj4hsh",
       "presetId": "iphone-duo-portrait",
       "name": "Foldable · Custom",
       "width": 1398,
@@ -775,7 +775,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_1nlro0",
+          "id": "text_mwo2xvmu_xrrycx",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -799,7 +799,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_ohaa4u",
+          "id": "text_mwo2xvmu_3vzko5",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -823,7 +823,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_lln487",
+          "id": "device_mwo2xvmu_ad8y1u",
           "type": "device",
           "name": "Foldable · Closed",
           "x": 232.05144940747493,
@@ -846,7 +846,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_29xrap",
+          "id": "text_mwo2xvmu_f4e68b",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -870,7 +870,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_tw3okz",
+          "id": "text_mwo2xvmu_ftd3fj",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -894,7 +894,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_nrtojk",
+          "id": "device_mwo2xvmu_e55xhe",
           "type": "device",
           "name": "Foldable · Closed",
           "x": 1630.051449407475,
@@ -917,7 +917,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_idu6hp",
+          "id": "text_mwo2xvmu_ty7m7x",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -941,7 +941,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_0xq9jp",
+          "id": "text_mwo2xvmu_hkch9b",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -965,7 +965,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_47a97q",
+          "id": "device_mwo2xvmu_vvznah",
           "type": "device",
           "name": "Foldable · Closed",
           "x": 3028.051449407475,
@@ -990,7 +990,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_3jog1o",
+      "id": "layout_mwo2xvmu_yjunko",
       "presetId": "iphone-63-landscape",
       "name": "iPhone 6.3″ · Landscape",
       "width": 2622,
@@ -1010,7 +1010,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_ljg0ce",
+          "id": "text_mwo2xvmu_z3xwwy",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -1034,7 +1034,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_z7ezh1",
+          "id": "text_mwo2xvmu_umcvvg",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -1058,7 +1058,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_5h9hj0",
+          "id": "device_mwo2xvmu_o4spjx",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 498,
@@ -1081,7 +1081,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_wn7vph",
+          "id": "text_mwo2xvmu_pzcdl9",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -1105,7 +1105,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_nkv6vf",
+          "id": "text_mwo2xvmu_0f5kfc",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -1129,7 +1129,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_j5jug5",
+          "id": "device_mwo2xvmu_fp3dsl",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 3120,
@@ -1152,7 +1152,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_mwjplm",
+          "id": "text_mwo2xvmu_am0swj",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -1176,7 +1176,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_jkz4r9",
+          "id": "text_mwo2xvmu_jj44lt",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -1200,7 +1200,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_lpl3ss",
+          "id": "device_mwo2xvmu_v0lrnz",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 5742,
@@ -1225,7 +1225,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_dpx70g",
+      "id": "layout_mwo2xvmu_67mtm9",
       "presetId": "ipad-13-landscape",
       "name": "iPad 13″ · Landscape",
       "width": 2752,
@@ -1245,7 +1245,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_ny74zr",
+          "id": "text_mwo2xvmu_vxut1z",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -1269,7 +1269,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_ra7bx9",
+          "id": "text_mwo2xvmu_x353dk",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -1293,7 +1293,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_n4dehb",
+          "id": "device_mwo2xvmu_f8wkoa",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 413,
@@ -1316,7 +1316,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_v5ggn0",
+          "id": "text_mwo2xvmu_91xgyo",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -1340,7 +1340,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_3ubcjo",
+          "id": "text_mwo2xvmu_7hbcpd",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -1364,7 +1364,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_mhyydn",
+          "id": "device_mwo2xvmu_p6v96b",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 3165,
@@ -1387,7 +1387,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_xjw86y",
+          "id": "text_mwo2xvmu_o6xsh6",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -1411,7 +1411,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_grbevf",
+          "id": "text_mwo2xvmu_lo0pvb",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -1435,7 +1435,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_e7yui9",
+          "id": "device_mwo2xvmu_xrjgq5",
           "type": "device",
           "name": "Tablet · 13″",
           "x": 5917,
@@ -1460,7 +1460,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_9zkjb6",
+      "id": "layout_mwo2xvmu_wfo6ay",
       "presetId": "product-header-21-9",
       "name": "Product Page Header · 21:9",
       "width": 3840,
@@ -1480,7 +1480,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_fyiccf",
+          "id": "text_mwo2xvmu_p92bqz",
           "type": "text",
           "name": "Creative headline",
           "translationKey": "creative_headline",
@@ -1504,7 +1504,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_sg0zmg",
+          "id": "text_mwo2xvmu_4ia5oc",
           "type": "text",
           "name": "Creative body",
           "translationKey": "creative_body",
@@ -1528,7 +1528,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_xt80gw",
+          "id": "device_mwo2xvmu_pdohqr",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 2611,
@@ -1553,7 +1553,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_9pgwsa",
+      "id": "layout_mwo2xvmu_sudy13",
       "presetId": "search-results-3-2",
       "name": "Search Results · 3:2",
       "width": 3840,
@@ -1573,7 +1573,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_fh3n4w",
+          "id": "text_mwo2xvmu_h80l1o",
           "type": "text",
           "name": "Creative headline",
           "translationKey": "creative_headline",
@@ -1597,7 +1597,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_g4hihy",
+          "id": "text_mwo2xvmu_6eg0bf",
           "type": "text",
           "name": "Creative body",
           "translationKey": "creative_body",
@@ -1621,7 +1621,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_sgmx5m",
+          "id": "device_mwo2xvmu_geusu0",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 2611,
@@ -1646,7 +1646,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_w9bcu1",
+      "id": "layout_mwo2xvmu_5gg7jq",
       "presetId": "universal-creative-16-9",
       "name": "Universal Creative · 16:9",
       "width": 5244,
@@ -1666,7 +1666,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_1yw7al",
+          "id": "text_mwo2xvmu_5the46",
           "type": "text",
           "name": "Creative headline",
           "translationKey": "creative_headline",
@@ -1690,7 +1690,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_i4av15",
+          "id": "text_mwo2xvmu_ccihxq",
           "type": "text",
           "name": "Creative body",
           "translationKey": "creative_body",
@@ -1714,7 +1714,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_4bzcah",
+          "id": "device_mwo2xvmu_n043oj",
           "type": "device",
           "name": "Phone · 6.3″",
           "x": 3566,
@@ -1739,7 +1739,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_xzcu1x",
+      "id": "layout_mwo2xvmu_nk8imp",
       "presetId": "android-phone-portrait",
       "name": "Android Phone · Portrait",
       "width": 1080,
@@ -1759,7 +1759,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_c3ay8o",
+          "id": "text_mwo2xvmu_gwt43w",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -1783,7 +1783,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_yxhfox",
+          "id": "text_mwo2xvmu_fdiwqt",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -1807,7 +1807,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_cgoj6i",
+          "id": "device_mwo2xvmu_4egqnm",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 251.01343873517789,
@@ -1830,7 +1830,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_1f3i4d",
+          "id": "text_mwo2xvmu_qa50zy",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -1854,7 +1854,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_3fhlr7",
+          "id": "text_mwo2xvmu_itujn2",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -1878,7 +1878,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_7kkd1l",
+          "id": "device_mwo2xvmu_smy0ha",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 1331.013438735178,
@@ -1901,7 +1901,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_csvaq8",
+          "id": "text_mwo2xvmu_75u3xh",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -1925,7 +1925,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_apbvxh",
+          "id": "text_mwo2xvmu_tbscvx",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -1949,7 +1949,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_4mzsjt",
+          "id": "device_mwo2xvmu_ebcy80",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 2411.0134387351777,
@@ -1974,7 +1974,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_fdxxqe",
+      "id": "layout_mwo2xvmu_0ls26o",
       "presetId": "android-phone-landscape",
       "name": "Android Phone · Landscape",
       "width": 1920,
@@ -1994,7 +1994,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_xr2716",
+          "id": "text_mwo2xvmu_3ogp8g",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -2018,7 +2018,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_l61gsv",
+          "id": "text_mwo2xvmu_uvhiak",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -2042,7 +2042,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_o14v95",
+          "id": "device_mwo2xvmu_2tpnkh",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 940.8,
@@ -2066,7 +2066,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_02zjnz",
+          "id": "text_mwo2xvmu_shf1ma",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -2090,7 +2090,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_o4hbqh",
+          "id": "text_mwo2xvmu_sf712n",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -2114,7 +2114,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_v91xew",
+          "id": "device_mwo2xvmu_nizqim",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 2860.8,
@@ -2138,7 +2138,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_9rpmk5",
+          "id": "text_mwo2xvmu_kig40a",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -2162,7 +2162,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_26b7bp",
+          "id": "text_mwo2xvmu_ug1k8y",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -2186,7 +2186,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_67moi0",
+          "id": "device_mwo2xvmu_6sceo8",
           "type": "device",
           "name": "Android Phone · 6.5″",
           "x": 4780.8,
@@ -2212,7 +2212,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_fwzpvc",
+      "id": "layout_mwo2xvmu_mpunqt",
       "presetId": "android-tablet-7-portrait",
       "name": "Android Tablet 7″ · Portrait",
       "width": 1440,
@@ -2232,7 +2232,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_gmuale",
+          "id": "text_mwo2xvmu_27udtb",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -2256,7 +2256,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_vg89cn",
+          "id": "text_mwo2xvmu_amzjv3",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -2280,7 +2280,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_5pxpx3",
+          "id": "device_mwo2xvmu_u0xmg7",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 200.12307692307695,
@@ -2303,7 +2303,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_0me4bt",
+          "id": "text_mwo2xvmu_qr3c0m",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -2327,7 +2327,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_ck9nap",
+          "id": "text_mwo2xvmu_axenoj",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -2351,7 +2351,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_ci399q",
+          "id": "device_mwo2xvmu_qx9cgg",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 1640.123076923077,
@@ -2374,7 +2374,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_1lvq69",
+          "id": "text_mwo2xvmu_t3edmq",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -2398,7 +2398,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_vm5kui",
+          "id": "text_mwo2xvmu_mbpn0w",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -2422,7 +2422,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_8xkslq",
+          "id": "device_mwo2xvmu_gq72ig",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 3080.123076923077,
@@ -2447,7 +2447,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_9jbchl",
+      "id": "layout_mwo2xvmu_j8qvps",
       "presetId": "android-tablet-7-landscape",
       "name": "Android Tablet 7″ · Landscape",
       "width": 2560,
@@ -2467,7 +2467,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_omvtrn",
+          "id": "text_mwo2xvmu_axy627",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -2491,7 +2491,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_7saxv1",
+          "id": "text_mwo2xvmu_am853f",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -2515,7 +2515,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_jti7cs",
+          "id": "device_mwo2xvmu_rctnw8",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 1254.4,
@@ -2539,7 +2539,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_f9c9bp",
+          "id": "text_mwo2xvmu_n53ezu",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -2563,7 +2563,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_fgu25i",
+          "id": "text_mwo2xvmu_7hgk8m",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -2587,7 +2587,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_yew1wc",
+          "id": "device_mwo2xvmu_0litq4",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 3814.4,
@@ -2611,7 +2611,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_s2rz2h",
+          "id": "text_mwo2xvmu_czc389",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -2635,7 +2635,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_8x9p8k",
+          "id": "text_mwo2xvmu_n35b0r",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -2659,7 +2659,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_rjfuvb",
+          "id": "device_mwo2xvmu_vjzgqe",
           "type": "device",
           "name": "Android Tablet · 7″",
           "x": 6374.4,
@@ -2685,7 +2685,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_e5cq81",
+      "id": "layout_mwo2xvmu_a4wl43",
       "presetId": "android-tablet-10-portrait",
       "name": "Android Tablet 10″ · Portrait",
       "width": 2160,
@@ -2705,7 +2705,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_tw0tlm",
+          "id": "text_mwo2xvmu_2v5pig",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -2729,7 +2729,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_vgi7xl",
+          "id": "text_mwo2xvmu_3tep69",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -2753,7 +2753,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_t1c8d0",
+          "id": "device_mwo2xvmu_lw0fnf",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 293.21438848920866,
@@ -2776,7 +2776,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_rnlrpg",
+          "id": "text_mwo2xvmu_3n50eq",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -2800,7 +2800,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_p9idsq",
+          "id": "text_mwo2xvmu_qnzcuo",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -2824,7 +2824,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_y9b9po",
+          "id": "device_mwo2xvmu_8umlz4",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 2453.2143884892084,
@@ -2847,7 +2847,7 @@
           "foldDirection": "toward"
         },
         {
-          "id": "text_mwo1atcl_gbd8uc",
+          "id": "text_mwo2xvmu_lhicxe",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -2871,7 +2871,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_rzwxfn",
+          "id": "text_mwo2xvmu_9sumwh",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -2895,7 +2895,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_wrbsiz",
+          "id": "device_mwo2xvmu_f6zr7g",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 4613.214388489208,
@@ -2920,7 +2920,7 @@
       ]
     },
     {
-      "id": "layout_mwo1atcl_evyrej",
+      "id": "layout_mwo2xvmu_9linje",
       "presetId": "android-tablet-10-landscape",
       "name": "Android Tablet 10″ · Landscape",
       "width": 3840,
@@ -2940,7 +2940,7 @@
       },
       "layers": [
         {
-          "id": "text_mwo1atcl_2lle4t",
+          "id": "text_mwo2xvmu_m1vwq1",
           "type": "text",
           "name": "Headline 01",
           "translationKey": "shot_01_headline",
@@ -2964,7 +2964,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_63sueb",
+          "id": "text_mwo2xvmu_3enbpm",
           "type": "text",
           "name": "Body 01",
           "translationKey": "shot_01_body",
@@ -2988,7 +2988,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_1f57dz",
+          "id": "device_mwo2xvmu_i99g4v",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 1881.6,
@@ -3012,7 +3012,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_4b1ixr",
+          "id": "text_mwo2xvmu_e3b4yy",
           "type": "text",
           "name": "Headline 02",
           "translationKey": "shot_02_headline",
@@ -3036,7 +3036,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_zznsw7",
+          "id": "text_mwo2xvmu_zg0jtl",
           "type": "text",
           "name": "Body 02",
           "translationKey": "shot_02_body",
@@ -3060,7 +3060,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_pbmdff",
+          "id": "device_mwo2xvmu_wrrk72",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 5721.6,
@@ -3084,7 +3084,7 @@
           "orientation": "landscape"
         },
         {
-          "id": "text_mwo1atcl_neam6t",
+          "id": "text_mwo2xvmu_fefug2",
           "type": "text",
           "name": "Headline 03",
           "translationKey": "shot_03_headline",
@@ -3108,7 +3108,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "text_mwo1atcl_hk2z83",
+          "id": "text_mwo2xvmu_vwexc1",
           "type": "text",
           "name": "Body 03",
           "translationKey": "shot_03_body",
@@ -3132,7 +3132,7 @@
           "localeOverrides": {}
         },
         {
-          "id": "device_mwo1atcl_cabp1d",
+          "id": "device_mwo2xvmu_kn30t1",
           "type": "device",
           "name": "Android Tablet · 10″",
           "x": 9561.6,
@@ -3158,7 +3158,7 @@
       ]
     }
   ],
-  "updatedAt": "2026-11-19T21:00:17.301Z",
+  "updatedAt": "2026-11-19T21:46:12.966Z",
   "notes": "Fictional focus planner · original demo screens",
   "copyOrder": [
     "shot_01_headline",
