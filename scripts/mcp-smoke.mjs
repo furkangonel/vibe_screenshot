@@ -84,6 +84,10 @@ try {
     }),
   );
   expect((await client.listTools()).tools).toHaveLength(34);
+  await page.evaluate(() => {
+    window.vibeTestAnimationFrame = window.requestAnimationFrame;
+    window.requestAnimationFrame = () => 0;
+  });
   const projectId = text(
     await client.callTool({ name: 'project_create', arguments: { name: 'MCP regression', examples: false } }),
   ).projectId;
@@ -141,6 +145,10 @@ try {
   await client.callTool({ name: 'history_undo', arguments: {} });
   await client.callTool({ name: 'history_redo', arguments: {} });
   await client.callTool({ name: 'project_save', arguments: { projectId } });
+  await page.evaluate(() => {
+    window.requestAnimationFrame = window.vibeTestAnimationFrame;
+    delete window.vibeTestAnimationFrame;
+  });
   // The generated agent configuration must really start the stdio bridge.
   const bridge = cursorConfig.mcpServers['vibe-screenshots'];
   stdio = new Client({ name: 'stdio-regression', version: '1.0.0' });

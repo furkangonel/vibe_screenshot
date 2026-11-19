@@ -84,7 +84,12 @@ try {
   }
 
   await expect(page.locator('.save-state')).toContainText('Saved on this device');
-  await page.screenshot({ path: 'docs/desktop.png' });
+  // Hidden Windows/Linux windows may never produce a screenshot frame. Rendering
+  // is verified by browser pixel tests and MCP preview/export tests instead.
+  if (process.env.VIBE_CAPTURE_DESKTOP === '1') {
+    await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].show());
+    await page.screenshot({ path: 'docs/desktop.png' });
+  }
   await app.close();
   app = await launch();
   const reopened = await app.firstWindow();

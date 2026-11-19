@@ -131,7 +131,7 @@ export function useWorkspace() {
       live = false;
     };
   }, []);
-  const flushing = useRef<Promise<void> | null>(null);
+  const flushing = useRef<Promise<boolean> | null>(null);
   const flush = useCallback(() => {
     if (flushing.current) return flushing.current;
     flushing.current = Promise.resolve()
@@ -145,7 +145,7 @@ export function useWorkspace() {
             );
             if (!dirty.length) {
               setStatus('saved');
-              return;
+              return true;
             }
             setStatus('saving');
             for (const entry of dirty) {
@@ -156,6 +156,7 @@ export function useWorkspace() {
         } catch {
           setStatus('error');
           setError('saveFailed');
+          return false;
         }
       })
       .finally(() => {

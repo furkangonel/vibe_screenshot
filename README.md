@@ -19,6 +19,7 @@ _Every screen shown here was drawn for the fictional Daylight demo. No personal 
 - **Exact output.** Export one opaque PNG or a ZIP of selected canvases and languages, including a manifest. Import and export portable project files with embedded images.
 - **Local agent control.** Enable MCP in Settings, review detected clients, and add their configuration from the app. Agents use the same project validation, renderer, and save flow as the editor.
 
+<a id="screenshot-presets"></a>
 <details>
 <summary>Screenshot presets</summary>
 
@@ -46,7 +47,7 @@ Get an installer from [Releases](https://github.com/furkangonel/vibe_screenshot/
 | macOS, Apple silicon | `*-mac-arm64.dmg` or `.zip` |
 | macOS, Intel         | `*-mac-x64.dmg` or `.zip`   |
 | Windows, x64         | `*-win-x64.exe`             |
-| Linux, x64           | `*-linux-x64.AppImage`      |
+| Linux, x64           | `*-linux-x86_64.AppImage`   |
 
 Release installers are currently **unsigned and not notarized**. Platform security checks may require manual approval. The app has no automatic updater; replace the installed app with a later release. Project data lives separately from the application bundle. Back up portable project files before changing devices or clearing app data.
 

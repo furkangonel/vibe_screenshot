@@ -7,6 +7,7 @@
 - Added Settings with precision controls, local MCP status, client configuration previews, and a searchable tool catalog.
 - Added authenticated loopback MCP with 34 tools, one reference resource, and one composition prompt.
 - Added local detection and configuration for Codex, Claude Code, Claude Desktop, Cursor, and VS Code, with backups and preservation of unrelated settings.
+- Kept MCP edits responsive while the studio is in the background and made save acknowledgements reflect the local write result.
 - Added equal-gap smart guides, adjustable snap distance, and optional cross-canvas alignment.
 - Retained Android phone, 7-inch tablet, and 10-inch tablet presets and device frames, including landscape variants.
 - Added original Daylight demo content, public documentation images, and tagged multi-platform release builds.

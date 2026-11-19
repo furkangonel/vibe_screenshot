@@ -10,9 +10,14 @@ import { migrateProject } from './projectMigration';
 import { createProjectZip, renderPage } from './exporter';
 import type { useWorkspace } from './useWorkspace';
 
-async function settle() {
-  await new Promise((resolve) => setTimeout(resolve, 0));
-  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+async function settle(committed: () => boolean) {
+  const deadline = Date.now() + 30_000;
+  // Background/hidden windows can suspend animation frames. A tool waits for
+  // the workspace commit, not for the compositor to paint a visible frame.
+  while (!committed()) {
+    if (Date.now() > deadline) throw new Error('The workspace did not commit this edit. Try again.');
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
 }
 async function base64(blob: Blob) {
   const bytes = new Uint8Array(await blob.arrayBuffer());
@@ -51,9 +56,10 @@ export function useDesktopAutomation(workspace: ReturnType<typeof useWorkspace>,
         if (['history_undo', 'history_redo'].includes(method)) {
           if (!(method === 'history_undo' ? ws.past.length : ws.future.length))
             throw new Error('No matching history entry.');
+          const target = method === 'history_undo' ? ws.past[ws.past.length - 1] : ws.future[0];
           (method === 'history_undo' ? ws.undo : ws.redo)();
-          await settle();
-          await ref.current.workspace.flush();
+          await settle(() => ref.current.workspace.project === target);
+          if (!(await ref.current.workspace.flush())) throw new Error('Local save failed. Check the studio.');
           return { updated: true };
         }
         if (method === 'project_create' || method === 'project_import') {
@@ -70,7 +76,7 @@ export function useDesktopAutomation(workspace: ReturnType<typeof useWorkspace>,
           parseProject(project);
           const id = await ws.addProject(project, true);
           if (!id) throw new Error('Project could not be saved.');
-          await settle();
+          await settle(() => ref.current.workspace.entries.some((entry) => entry.id === id));
           open();
           return { projectId: id };
         }
@@ -80,7 +86,7 @@ export function useDesktopAutomation(workspace: ReturnType<typeof useWorkspace>,
         if (method === 'project_get') return args.includeImages === true ? project : withoutImages(project);
         if (method === 'project_open') {
           ws.switchProject(entry.id);
-          await settle();
+          await settle(() => ref.current.workspace.activeId === entry.id);
           open();
           return { projectId: entry.id };
         }
@@ -90,13 +96,12 @@ export function useDesktopAutomation(workspace: ReturnType<typeof useWorkspace>,
             true,
           );
           if (!id) throw new Error('Project could not be saved.');
+          await settle(() => ref.current.workspace.entries.some((entry) => entry.id === id));
           return { projectId: id };
         }
         if (method === 'project_save') {
           if (!entry.persisted) throw new Error('Enable Save on this device in the app first.');
-          await ws.flush();
-          if (ref.current.workspace.status === 'error')
-            throw new Error('Local save failed. Check the studio.');
+          if (!(await ws.flush())) throw new Error('Local save failed. Check the studio.');
           return { saved: true };
         }
         if (method === 'documents_list')
@@ -153,9 +158,12 @@ export function useDesktopAutomation(workspace: ReturnType<typeof useWorkspace>,
         }
         const changed = applyAutomation(project, method, args);
         ws.updateEntry(entry.id, changed.project);
-        await settle();
-        await ref.current.workspace.flush();
-        if (ref.current.workspace.status === 'error')
+        await settle(
+          () =>
+            ref.current.workspace.entries.find((e) => e.id === entry.id)?.project.documents ===
+            changed.project.documents,
+        );
+        if (!(await ref.current.workspace.flush()))
           throw new Error('The edit is visible but could not be saved. Check the studio.');
         return { ...(changed.result as object), saved: entry.persisted };
       }),
