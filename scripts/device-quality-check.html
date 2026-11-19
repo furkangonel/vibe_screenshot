@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Device quality check</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f2f3f7;
+        color: #1d1d1f;
+        font:
+          13px -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        padding: 36px 48px;
+      }
+      h1 {
+        font-size: 26px;
+        letter-spacing: -0.04em;
+        margin: 0 0 7px;
+      }
+      p {
+        color: #717781;
+        margin: 0 0 28px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        max-width: 1320px;
+      }
+      figure {
+        margin: 0;
+        border: 1px solid #fff;
+        border-radius: 18px;
+        background: #fff8;
+        overflow: hidden;
+      }
+      figcaption {
+        padding: 17px 20px;
+        border-bottom: 1px solid #ddd;
+        font-weight: 550;
+      }
+      figcaption small {
+        display: block;
+        font-size: 11px;
+        color: #747a84;
+        margin-top: 5px;
+        font-weight: 400;
+      }
+      .surface {
+        height: 600px;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(ellipse at 50% 10%, #fff, #e6eaf1);
+      }
+      canvas {
+        display: block;
+        max-width: 90%;
+        max-height: 550px;
+        object-fit: contain;
+      }
+      .folds {
+        margin-top: 28px;
+      }
+      .folds .surface {
+        height: 350px;
+      }
+      .folds canvas {
+        max-height: 300px;
+      }
+      #status {
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Device materials</h1>
+    <p>Identical screen artwork. Original resolution. No image filters on the imported frame.</p>
+    <div id="flat" class="gallery"></div>
+    <div id="folds" class="gallery folds"></div>
+    <p id="status">Rendering…</p>
+    <script type="module">
+      import { getDevice, getDeviceColor, DEVICE_ARTWORK_KIND } from '/src/devices.ts';
+      import { drawDeviceScreen } from '/src/deviceScreen.ts';
+      import { createHalfFoldedDeviceCanvas, getHalfFoldedCanvasSize } from '/src/duoHalfFold.ts';
+      const load = async (src) => {
+        const image = new Image();
+        image.src = src;
+        await image.decode();
+        return image;
+      };
+      const phone = getDevice('iphone-18-pro');
+      const before = import.meta.glob('../.local/quality-before/*.svg', {
+        eager: true,
+        query: '?url',
+        import: 'default',
+      });
+      const versions = [
+        [
+          'Previous simplified frame',
+          'Flat stroke and a single surface gradient',
+          before['../.local/quality-before/phone.svg'],
+        ],
+        [
+          'Restored high-resolution frame',
+          'Metal highlights, antenna bands, buttons and camera',
+          getDeviceColor(phone, 'black').src,
+        ],
+        [
+          'Open-source vector fallback',
+          'Layered metal edges, optical glass and physical details',
+          '/assets/devices/iphone-18-pro/black.svg',
+        ],
+      ];
+      function append(target, title, description, canvas) {
+        const f = document.createElement('figure'),
+          caption = document.createElement('figcaption'),
+          surface = document.createElement('div');
+        caption.append(document.createTextNode(title));
+        const small = document.createElement('small');
+        small.textContent = description;
+        caption.append(small);
+        surface.className = 'surface';
+        surface.append(canvas);
+        f.append(caption, surface);
+        document.querySelector(target).append(f);
+      }
+      for (const [title, description, src] of versions) {
+        if (!src) continue;
+        const frame = await load(src),
+          canvas = document.createElement('canvas');
+        canvas.width = phone.frameWidth;
+        canvas.height = phone.frameHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(
+          phone.screenX,
+          phone.screenY,
+          phone.screenWidth,
+          phone.screenHeight,
+          phone.screenRadius,
+        );
+        ctx.clip();
+        drawDeviceScreen(ctx, phone.screenX, phone.screenY, phone.screenWidth, phone.screenHeight);
+        ctx.restore();
+        ctx.drawImage(frame, 0, 0);
+        append('#flat', title, description, canvas);
+      }
+      const source = document.createElement('canvas');
+      source.width = 1000;
+      source.height = 1500;
+      drawDeviceScreen(source.getContext('2d'), 0, 0, 1000, 1500);
+      const screen = await load(source.toDataURL());
+      for (const [orientation, title, id] of [
+        ['vertical', 'Book · 110°', 'iphone-duo-inner-open'],
+        ['horizontal', 'Tabletop · 110°', 'iphone-duo-inner-open'],
+        ['tent', 'Tent · 90°', 'iphone-duo-outer-open'],
+      ]) {
+        const angle = orientation === 'tent' ? 90 : 110,
+          size = getHalfFoldedCanvasSize(orientation, angle),
+          frame = await load(getDeviceColor(getDevice(id), 'night-sky').src);
+        const c = createHalfFoldedDeviceCanvas(
+          screen,
+          frame,
+          'cover',
+          'night-sky',
+          orientation,
+          angle,
+          'toward',
+          { width: 1000, height: (1000 * size.height) / size.width },
+        );
+        append('#folds', title, 'Full-resolution material, dynamic fold geometry', c);
+      }
+      document.querySelector('#status').textContent =
+        `PASS · ${DEVICE_ARTWORK_KIND} artwork active · preview / export share the screen renderer`;
+    </script>
+  </body>
+</html>

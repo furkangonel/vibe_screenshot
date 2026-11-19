@@ -1,0 +1,31 @@
+appId: studio.vibescreenshots.desktop
+productName: Vibe Screenshots
+asar: true
+directories:
+  output: release
+  buildResources: public/brand
+files:
+  - dist/**/*
+  - electron/**/*.cjs
+  - package.json
+  - LICENSE
+  - THIRD_PARTY_NOTICES.md
+artifactName: '${productName}-${version}-${os}-${arch}.${ext}'
+mac:
+  category: public.app-category.graphics-design
+  icon: public/brand/icon.png
+  target:
+    - dmg
+    - zip
+win:
+  icon: public/brand/icon.png
+  target:
+    - nsis
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+linux:
+  icon: public/brand/icon.png
+  category: Graphics
+  target:
+    - AppImage

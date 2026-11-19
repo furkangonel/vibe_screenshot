@@ -1,0 +1,74 @@
+{
+  "name": "vibe-screenshots",
+  "private": true,
+  "version": "2026.11.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "validate": "node scripts/validate.mjs",
+    "build": "npm run validate && tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "desktop": "npm run build && electron .",
+    "desktop:dev": "node scripts/desktop-dev.mjs",
+    "desktop:pack": "npm run build && electron-builder --dir",
+    "desktop:dist": "npm run build && electron-builder --publish never",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:desktop": "npm run build && node scripts/desktop-smoke.mjs",
+    "source:pack": "node scripts/package-source.mjs",
+    "notices:generate": "node scripts/generate-notices.mjs",
+    "test:mcp": "node scripts/mcp-smoke.mjs",
+    "docs:capture": "node scripts/capture-docs.mjs"
+  },
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "jsonc-parser": "^3.3.1",
+    "jszip": "^3.10.1",
+    "konva": "^10.0.8",
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-konva": "^19.2.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "fake-indexeddb": "^6.2.7",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "description": "A local-first screenshot studio for app launches. Compose, localize and export on your device.",
+  "license": "MIT",
+  "author": "Furkan Gonel",
+  "main": "electron/main.cjs",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/furkangonel/vibe_screenshot.git"
+  },
+  "homepage": "https://github.com/furkangonel/vibe_screenshot#readme",
+  "bugs": {
+    "url": "https://github.com/furkangonel/vibe_screenshot/issues"
+  }
+}

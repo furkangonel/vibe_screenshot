@@ -1,0 +1,17 @@
+name: Bug report
+description: Report a reproducible problem in the studio.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include steps to reproduce, expected behavior, and actual behavior. Remove private project data.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Version, OS, browser or desktop app
+    validations:
+      required: true

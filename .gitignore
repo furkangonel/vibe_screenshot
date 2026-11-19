@@ -1,0 +1,26 @@
+node_modules/
+dist/
+release/
+.local/
+output/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+coverage/
+playwright-report/
+test-results/
+*.log
+
+# Personal design references and legacy documentation captures
+/*.jpg
+/*.jpeg
+/*.png
+/docs/*.png
+# Portable user projects are private; only the fictional example is shared
+*.vibescreens.json
+!examples/daylight.vibescreens.json
+*mcp-connection.json
+*desktop-settings.json
+*.vibe-backup-*

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="3000" viewBox="0 0 2300 3000">
+<defs>
+  <linearGradient id="edge" x1="0" y1="0" x2="1" y2=".13"><stop stop-color="#7b818b"/><stop offset=".025" stop-color="#fafbfc"/><stop offset=".05" stop-color="#e0e3e7"/><stop offset=".17" stop-color="#7b818b"/><stop offset=".46" stop-color="#e0e3e7"/><stop offset=".74" stop-color="#7b818b"/><stop offset=".96" stop-color="#fafbfc"/><stop offset="1" stop-color="#7b818b"/></linearGradient>
+  <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff" stop-opacity=".8"/><stop offset=".19" stop-color="#fafbfc" stop-opacity=".28"/><stop offset=".45" stop-color="#090b12"/><stop offset=".73" stop-color="#05070d"/><stop offset=".94" stop-color="#fafbfc" stop-opacity=".7"/><stop offset="1" stop-color="#10151e"/></linearGradient>
+  <linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e0e3e7"/><stop offset=".36" stop-color="#7b818b"/><stop offset="1" stop-color="#e0e3e7"/></linearGradient>
+  <radialGradient id="optic"><stop stop-color="#163854"/><stop offset=".25" stop-color="#091420"/><stop offset=".47" stop-color="#302e63"/><stop offset=".7" stop-color="#14212e"/><stop offset="1" stop-color="#04070d"/></radialGradient>
+  <linearGradient id="lensRim" x2=".7" y2="1"><stop stop-color="#fafbfc"/><stop offset=".25" stop-color="#172332"/><stop offset=".6" stop-color="#080d16"/><stop offset=".9" stop-color="#e0e3e7"/><stop offset="1" stop-color="#fafbfc"/></linearGradient>
+  <radialGradient id="flash"><stop stop-color="#fffde8"/><stop offset=".52" stop-color="#e0d8bd"/><stop offset=".8" stop-color="#bcc1bb"/><stop offset="1" stop-color="#75808c"/></radialGradient>
+  <pattern id="grain" width="9" height="11" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".6" fill="#fff" opacity=".11"/><circle cx="7" cy="8" r=".65" fill="#000" opacity=".15"/></pattern>
+  <mask id="cut"><rect width="2300" height="3000" fill="#fff"/><path d="M 179,124 H 2121 A 61,61 0 0 1 2182,185 V 2815 A 61,61 0 0 1 2121,2876 H 179 A 61,61 0 0 1 118,2815 V 185 A 61,61 0 0 1 179,124 Z" fill="#000"/></mask>
+</defs>
+<g mask="url(#cut)">
+<g fill="url(#edge)" stroke="#7b818b" stroke-width="3"><rect x="1" y="660" width="17" height="87.75" rx="6"/><rect x="1" y="930" width="17" height="195" rx="7"/><rect x="1" y="1200" width="17" height="195" rx="7"/><rect x="2282" y="990" width="17" height="253.5" rx="7"/></g>
+<path d="M 123,5 H 2177 A 113,113 0 0 1 2290,118 V 2882 A 113,113 0 0 1 2177,2995 H 123 A 113,113 0 0 1 10,2882 V 118 A 113,113 0 0 1 123,5 Z" fill="url(#edge)" stroke="#7b818b" stroke-width="5"/>
+<path d="M 124,12 H 2176 A 107,107 0 0 1 2283,119 V 2881 A 107,107 0 0 1 2176,2988 H 124 A 107,107 0 0 1 17,2881 V 119 A 107,107 0 0 1 124,12 Z" fill="none" stroke="url(#rim)" stroke-width="5"/>
+<path d="M 125,21 H 2175 A 99,99 0 0 1 2274,120 V 2880 A 99,99 0 0 1 2175,2979 H 125 A 99,99 0 0 1 26,2880 V 120 A 99,99 0 0 1 125,21 Z" fill="none" stroke="#000" stroke-opacity=".65" stroke-width="6"/>
+<path d="M 179,107 H 2121 A 78,78 0 0 1 2199,185 V 2815 A 78,78 0 0 1 2121,2893 H 179 A 78,78 0 0 1 101,2815 V 185 A 78,78 0 0 1 179,107 Z" fill="#05070c"/>
+<path d="M 179,114 H 2121 A 71,71 0 0 1 2192,185 V 2815 A 71,71 0 0 1 2121,2886 H 179 A 71,71 0 0 1 108,2815 V 185 A 71,71 0 0 1 179,114 Z" fill="none" stroke="url(#rim)" stroke-width="3"/>
+<path d="M 124,9 H 2176 A 110,110 0 0 1 2286,119 V 2881 A 110,110 0 0 1 2176,2991 H 124 A 110,110 0 0 1 14,2881 V 119 A 110,110 0 0 1 124,9 Z" fill="url(#grain)"/>
+<g fill="#fafbfc" opacity=".28"><rect x="10" y="330" width="25" height="13"/><rect x="2265" y="330" width="25" height="13"/></g><g fill="#fafbfc" opacity=".28"><rect x="10" y="2640" width="25" height="13"/><rect x="2265" y="2640" width="25" height="13"/></g>
+</g>
+<g transform="translate(59 1500)"><circle r="15" fill="url(#lensRim)" stroke="#090d17" stroke-width="7"/><circle r="13.05" fill="#090d14" stroke="#7f91ac" stroke-opacity=".45" stroke-width="2"/><circle r="10.05" fill="url(#optic)"/><ellipse cx="-3.45" cy="-3.9000000000000004" rx="4.050000000000001" ry="1.7999999999999998" fill="#c3e0ff" opacity=".2" transform="rotate(-35)"/><circle r="3.45" fill="#02050a"/><circle cx="1.65" cy="-2.1" r="1.5" fill="#899cf7" opacity=".65"/></g>
+
+</svg>

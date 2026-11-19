@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Screen corner mask</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 30px;
+        background: #f3f4f7;
+        color: #1d1d1f;
+        font:
+          13px -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      h1 {
+        font-size: 24px;
+        letter-spacing: -0.03em;
+        margin: 0 0 8px;
+      }
+      p {
+        color: #737982;
+        margin: 0 0 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 1000px;
+      }
+      figure {
+        margin: 0;
+        border: 1px solid #fff;
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      figcaption {
+        padding: 16px 20px;
+        background: #ffffff80;
+        font-weight: 600;
+      }
+      .surface {
+        display: grid;
+        place-items: center;
+        height: 650px;
+        background: #e8efff;
+      }
+      canvas {
+        max-height: 600px;
+        max-width: 94%;
+        object-fit: contain;
+      }
+      #status {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cover display · corner fit</h1>
+    <p>The screen follows the casing: tight fold corners, broad outer corners.</p>
+    <div class="grid" id="gallery"></div>
+    <p id="status">Rendering…</p>
+    <script type="module">
+      import { getDevice, getDeviceColor } from '/src/devices.ts';
+      import { drawDeviceScreen } from '/src/deviceScreen.ts';
+      import { traceDeviceScreen } from '/src/deviceScreenPath.ts';
+      const device = getDevice('iphone-duo-outer-closed'),
+        frame = new Image();
+      frame.src = getDeviceColor(device, 'night-sky').src;
+      await frame.decode();
+      for (const [title, fixed] of [
+        ['Before · uniform corner radius', false],
+        ['After · casing-matched corners', true],
+      ]) {
+        const canvas = document.createElement('canvas');
+        canvas.width = device.frameWidth;
+        canvas.height = device.frameHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        traceDeviceScreen(ctx, { ...device, screenCorners: fixed ? device.screenCorners : undefined });
+        ctx.clip();
+        drawDeviceScreen(ctx, device.screenX, device.screenY, device.screenWidth, device.screenHeight);
+        ctx.restore();
+        ctx.drawImage(frame, 0, 0);
+        const figure = document.createElement('figure'),
+          caption = document.createElement('figcaption'),
+          surface = document.createElement('div');
+        caption.textContent = title;
+        surface.className = 'surface';
+        surface.append(canvas);
+        figure.append(caption, surface);
+        document.querySelector('#gallery').append(figure);
+      }
+      document.querySelector('#status').textContent =
+        'PASS · shared per-corner path in preview, PNG export and fold scenes';
+    </script>
+  </body>
+</html>

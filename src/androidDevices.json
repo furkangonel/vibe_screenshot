@@ -1,0 +1,41 @@
+[
+  {
+    "id": "android-phone",
+    "label": "Android Phone · 6.5″",
+    "category": "phone",
+    "frameWidth": 1190,
+    "frameHeight": 2530,
+    "screenX": 55,
+    "screenY": 65,
+    "screenWidth": 1080,
+    "screenHeight": 2400,
+    "screenRadius": 118,
+    "colors": ["graphite", "silver", "sage"]
+  },
+  {
+    "id": "android-tablet-7",
+    "label": "Android Tablet · 7″",
+    "category": "tablet",
+    "frameWidth": 1320,
+    "frameHeight": 2080,
+    "screenX": 60,
+    "screenY": 80,
+    "screenWidth": 1200,
+    "screenHeight": 1920,
+    "screenRadius": 38,
+    "colors": ["graphite", "silver"]
+  },
+  {
+    "id": "android-tablet-10",
+    "label": "Android Tablet · 10″",
+    "category": "tablet",
+    "frameWidth": 1780,
+    "frameHeight": 2780,
+    "screenX": 90,
+    "screenY": 110,
+    "screenWidth": 1600,
+    "screenHeight": 2560,
+    "screenRadius": 46,
+    "colors": ["graphite", "silver"]
+  }
+]

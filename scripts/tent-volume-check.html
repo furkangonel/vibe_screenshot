@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tent volume study</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 36px;
+        background: #f2f3f7;
+        color: #1d1d1f;
+        font:
+          13px -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      h1 {
+        font-size: 26px;
+        letter-spacing: -0.04em;
+        margin: 0 0 8px;
+      }
+      p {
+        color: #727780;
+        margin: 0 0 26px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+        max-width: 1200px;
+      }
+      figure {
+        margin: 0;
+        border-radius: 18px;
+        border: 1px solid white;
+        overflow: hidden;
+        background: #ffffff66;
+      }
+      figcaption {
+        padding: 18px 20px;
+        border-bottom: 1px solid #dfe2e8;
+        font-weight: 600;
+      }
+      small {
+        display: block;
+        color: #777d87;
+        font-weight: 400;
+        margin-top: 5px;
+      }
+      .surface {
+        height: 400px;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(ellipse at 50% 15%, #fff, #e8ecf2);
+      }
+      canvas {
+        max-width: 94%;
+        max-height: 350px;
+        object-fit: contain;
+      }
+      #status {
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tent stand · volume & perspective</h1>
+    <p>Two rounded metal slabs, a physical hinge and a single perspective camera.</p>
+    <div class="gallery" id="gallery"></div>
+    <p id="status">Rendering…</p>
+    <script type="module">
+      import { createHalfFoldedDeviceCanvas, getHalfFoldedCanvasSize } from '/src/duoHalfFold.ts';
+      import { getDevice, getDeviceColor } from '/src/devices.ts';
+      import { drawDeviceScreen } from '/src/deviceScreen.ts';
+      import { getTentScene, polygonArea } from '/src/tentGeometry.ts';
+      const load = async (src) => {
+        const image = new Image();
+        image.src = src;
+        await image.decode();
+        return image;
+      };
+      const frame = await load(getDeviceColor(getDevice('iphone-duo-outer-open'), 'night-sky').src);
+      const wallpaper = document.createElement('canvas');
+      wallpaper.width = 2034;
+      wallpaper.height = 1398;
+      drawDeviceScreen(wallpaper.getContext('2d'), 0, 0, 2034, 1398);
+      const screen = await load(wallpaper.toDataURL());
+      function append(title, caption, canvas) {
+        const f = document.createElement('figure'),
+          c = document.createElement('figcaption'),
+          s = document.createElement('div');
+        c.textContent = title;
+        const small = document.createElement('small');
+        small.textContent = caption;
+        c.append(small);
+        s.className = 'surface';
+        s.append(canvas);
+        f.append(c, s);
+        document.querySelector('#gallery').append(f);
+      }
+      const previous = import.meta.glob('../.local/tent-before/duoHalfFold.ts', { eager: true });
+      const old = previous['../.local/tent-before/duoHalfFold.ts'];
+      if (old) {
+        const size = old.getHalfFoldedCanvasSize('tent', 90);
+        append(
+          'Before · 90°',
+          'Rear panel collapses into a thin strip',
+          old.createHalfFoldedDeviceCanvas(screen, frame, 'cover', 'night-sky', 'tent', 90, 'toward', {
+            width: 1400,
+            height: (1400 * size.height) / size.width,
+          }),
+        );
+      }
+      for (const [angle, direction, title] of [
+        [90, 'toward', 'After · 90°'],
+        [90, 'away', 'Opposite viewpoint · 90°'],
+        [110, 'toward', '110° · wider stance'],
+        [135, 'away', '135° · near-open stance'],
+      ]) {
+        const size = getHalfFoldedCanvasSize('tent', angle);
+        const canvas = createHalfFoldedDeviceCanvas(
+          screen,
+          frame,
+          'cover',
+          'night-sky',
+          'tent',
+          angle,
+          direction,
+          { width: 1400, height: (1400 * size.height) / size.width },
+        );
+        append(title, 'Physical side walls · glass interior · contact shadows', canvas);
+      }
+      const scene = getTentScene(90),
+        front = scene.faces.find((f) => f.id === 'front-outer'),
+        rear = scene.faces.find((f) => f.id === 'rear-inner');
+      document.querySelector('#status').textContent =
+        `PASS · rear plane area ${Math.round((polygonArea(rear.points) / polygonArea(front.points)) * 100)}% of front · 58-unit body thickness · mirrored camera views`;
+    </script>
+  </body>
+</html>

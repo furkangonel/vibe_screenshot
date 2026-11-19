@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <title>Duo render checks</title>
+  <style>
+    body {
+      margin: 28px;
+      background: #f5f7fb;
+      color: #172033;
+      font: 15px system-ui;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+    #results {
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1280px;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid #d9dde5;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    figcaption {
+      padding: 12px 16px;
+      border-bottom: 1px solid #d9dde5;
+      font-weight: 600;
+    }
+    .surface {
+      display: grid;
+      place-items: center;
+      height: 340px;
+      background: conic-gradient(#e2e6ed 25%, #fff 0 50%, #e2e6ed 0 75%, #fff 0) 0 0 / 24px 24px;
+    }
+    canvas {
+      max-width: 95%;
+      max-height: 310px;
+      object-fit: contain;
+    }
+    a {
+      display: inline-block;
+      margin: 14px 0;
+      color: #2457f5;
+    }
+  </style>
+  <h1>Foldable · Render checks</h1>
+  <p id="results">Running…</p>
+  <div id="gallery"></div>
+  <script type="module">
+    import {
+      createHalfFoldedDeviceCanvas,
+      drawHalfFoldedDevice,
+      getHalfFoldedCanvasSize,
+    } from '/src/duoHalfFold.ts';
+    import { createDefaultProject } from '/src/defaultProject.ts';
+    import { renderPage } from '/src/exporter.ts';
+
+    const load = (src) =>
+      new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+      });
+    const screen = await load(
+      'data:image/svg+xml;charset=utf-8,' +
+        encodeURIComponent(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="2034" height="1398"><rect width="2034" height="1398" fill="#f7f9fd"/><rect x="0" y="0" width="2034" height="170" fill="#203653"/><text x="110" y="112" font-family="Arial" font-size="68" fill="white">Duo landscape display</text><text x="110" y="370" font-family="Arial" font-size="94" fill="#172033">Ready for tent mode</text><rect x="110" y="500" width="1814" height="700" rx="50" fill="#dce8ff"/><path d="M210 1020 L550 770 L920 870 L1280 650 L1800 740" fill="none" stroke="#2457f5" stroke-width="24"/><circle cx="1280" cy="650" r="36" fill="#2457f5"/></svg>`,
+        ),
+    );
+    const { getDevice, getDeviceColor } = await import('/src/devices.ts');
+    const inner = await load(getDeviceColor(getDevice('iphone-duo-inner-open'), 'night-sky').src);
+    const outer = await load(getDeviceColor(getDevice('iphone-duo-outer-open'), 'night-sky').src);
+    const whiteInner = await load(getDeviceColor(getDevice('iphone-duo-inner-open'), 'star-white').src);
+    let samples = 0;
+    const failures = [];
+    for (const orientation of ['vertical', 'horizontal']) {
+      for (const angle of [35, 45, 90, 110, 135, 175]) {
+        for (const direction of ['toward', 'away']) {
+          for (const finish of ['night-sky', 'star-white']) {
+            const geometry = getHalfFoldedCanvasSize(orientation, angle);
+            const canvas = createHalfFoldedDeviceCanvas(
+              screen,
+              finish === 'star-white' ? whiteInner : inner,
+              'cover',
+              finish,
+              orientation,
+              angle,
+              direction,
+              { width: 1000, height: (1000 * geometry.height) / geometry.width },
+            );
+            const context = canvas.getContext('2d');
+            const toward = direction === 'toward';
+            for (const [sourceX, sourceY] of [
+              [20, 20],
+              [2227, 20],
+              [20, 3073],
+              [2227, 3073],
+            ]) {
+              const half = (orientation === 'vertical' ? 2247 : 3093) / 2;
+              const scale = geometry.projected / half;
+              const outer = 82 + (toward ? 0 : geometry.depth);
+              const hinge = 82 + (toward ? geometry.depth : 0);
+              const shear = (hinge - outer) / half;
+              const corner =
+                orientation === 'vertical'
+                  ? sourceX < half
+                    ? [82 + sourceX * scale, outer + sourceX * shear + sourceY]
+                    : [
+                        82 + geometry.projected + (sourceX - half) * scale,
+                        hinge - (sourceX - half) * shear + sourceY,
+                      ]
+                  : sourceY < half
+                    ? [outer + sourceX + sourceY * shear, 82 + sourceY * scale]
+                    : [
+                        hinge + sourceX - (sourceY - half) * shear,
+                        82 + geometry.projected + (sourceY - half) * scale,
+                      ];
+              const alpha = context.getImageData(
+                Math.round((corner[0] * canvas.width) / geometry.width),
+                Math.round((corner[1] * canvas.height) / geometry.height),
+                1,
+                1,
+              ).data[3];
+              samples++;
+              if (alpha !== 0)
+                failures.push(
+                  `${orientation}/${angle}/${direction}/${finish}/${sourceX},${sourceY}: transparent corner alpha=${alpha}`,
+                );
+            }
+            canvas.width = 0;
+            canvas.height = 0;
+          }
+        }
+      }
+    }
+    for (const [orientation, direction, caption] of [
+      ['tent', 'toward', 'Tent stand · front left · 90°'],
+      ['tent', 'away', 'Tent stand · front right · 90°'],
+      ['horizontal', 'away', 'Horizontal tabletop · clean corners · 110°'],
+      ['vertical', 'toward', 'Vertical book · clean corners · 110°'],
+    ]) {
+      const angle = orientation === 'tent' ? 90 : 110;
+      const size = getHalfFoldedCanvasSize(orientation, angle);
+      const canvas = createHalfFoldedDeviceCanvas(
+        screen,
+        orientation === 'tent' ? outer : inner,
+        'cover',
+        'night-sky',
+        orientation,
+        angle,
+        direction,
+        { width: 1600, height: (1600 * size.height) / size.width },
+      );
+      const figure = document.createElement('figure');
+      const label = document.createElement('figcaption');
+      label.textContent = caption;
+      const surface = document.createElement('div');
+      surface.className = 'surface';
+      surface.append(canvas);
+      figure.append(label, surface);
+      document.querySelector('#gallery').append(figure);
+    }
+    for (const orientation of ['vertical', 'horizontal', 'tent']) {
+      const target = document.createElement('canvas');
+      target.width = 1000;
+      target.height = 800;
+      const ctx = target.getContext('2d');
+      ctx.fillStyle = '#13a47c';
+      ctx.fillRect(0, 0, 1000, 800);
+      drawHalfFoldedDevice(
+        ctx,
+        screen,
+        orientation === 'tent' ? outer : inner,
+        'cover',
+        'night-sky',
+        orientation,
+        90,
+        'toward',
+        100,
+        100,
+        800,
+        600,
+      );
+      const pixel = ctx.getImageData(100, 100, 1, 1).data;
+      if (pixel[0] !== 19 || pixel[1] !== 164 || pixel[2] !== 124 || pixel[3] !== 255)
+        failures.push(`${orientation}: artboard background altered`);
+    }
+    const project = createDefaultProject();
+    const output = project.documents.find((item) => item.presetId === 'iphone-duo-portrait');
+    output.background.type = 'solid';
+    output.background.color = '#f5f7fb';
+    output.layers = [
+      {
+        id: 'tent-check',
+        type: 'device',
+        name: 'Tent',
+        deviceId: 'iphone-duo-folded-tent',
+        colorId: 'night-sky',
+        x: 90,
+        y: 680,
+        width: 1218,
+        height:
+          (1218 * getHalfFoldedCanvasSize('tent', 90).height) / getHalfFoldedCanvasSize('tent', 90).width,
+        rotation: 0,
+        opacity: 1,
+        visible: true,
+        locked: false,
+        screenSrc: screen.src,
+        screenFit: 'cover',
+        localeScreens: {},
+        foldAngle: 90,
+        foldDirection: 'toward',
+      },
+    ];
+    const exported = await renderPage(project, output, 'en-US', 0);
+    if (exported.width !== 1398 || exported.height !== 2034) failures.push('Incorrect export dimensions');
+    const pixels = exported.getContext('2d').getImageData(0, 0, exported.width, exported.height).data;
+    for (let i = 3; i < pixels.length; i += 4) {
+      if (pixels[i] !== 255) {
+        failures.push('PNG export has transparent pixels');
+        break;
+      }
+    }
+    const link = document.createElement('a');
+    link.textContent = 'Download verified 1398×2034 Duo PNG';
+    link.download = 'duo-tent-1398x2034.png';
+    link.href = exported.toDataURL('image/png');
+    document.querySelector('#results').after(link);
+    document.querySelector('#results').textContent = failures.length
+      ? `FAIL\n${failures.join('\n')}`
+      : `PASS · ${samples} transparent corner checks · 3 background isolation checks · 1398×2034 opaque PNG export`;
+    if (failures.length) throw new Error(failures.join('\n'));
+  </script>
+</html>
